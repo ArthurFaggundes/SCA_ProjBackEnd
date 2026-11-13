@@ -30,6 +30,15 @@ namespace SCA_Console.Services
             {
                 throw new ArgumentException("[Erro] Já existe uma turma com esse ID.");
             }
+            if (turma.idTurma <= 0)
+            {
+                throw new ArgumentException("[Erro] O ID da turma deve ser maior que 0.");
+            }
+
+            turma.Abrir(); 
+            //?? não sei se é para estar aqui
+            //?? "O atributo aberta é inicializado como falso e alterado para verdadeiro quando a turma for aberta com sucesso"
+            //?? ou seja, quando ela abre, ela abre :) ????
 
             _turmaRepository.CriarTurma(turma);
         }
@@ -73,6 +82,9 @@ namespace SCA_Console.Services
 
         public void MatricularAluno(int idAluno, int idTurma)
         {
+            //?? não entedi o "método matricular deve permitir no máximo cinco alunos por turma"
+            //?? seria para criar um Loop onde permite cadastrar 5 alunos ao mesmo tempo?
+
             Aluno aluno = _alunoRepository.BuscarAluno(idAluno);
             Turma turma = _turmaRepository.BuscarTurma(idTurma);
 
@@ -99,6 +111,9 @@ namespace SCA_Console.Services
 
         public void AbrirTurma(int idTurma)
         {
+            //?? "método abrir deve permitir no mínimo dois alunos por turma"
+            //?? então para abrir uma turma precisa de alunos?
+
             Turma turma = _turmaRepository.BuscarTurma(idTurma);
 
             if (turma == null)
